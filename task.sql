@@ -1,4 +1,4 @@
-CREATE DATABASE ShopDB;
+CREATE DATABASE IF NOT EXISTS ShopDB;
 USE ShopDB;
 
 CREATE TABLE Products (
@@ -19,15 +19,15 @@ CREATE TABLE Customers (
 
 CREATE TABLE Orders (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    CustomerID INT,
+    CustomerID INT,  -- nullable due to ON DELETE SET NULL
     Date DATE NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customers(ID) ON DELETE SET NULL
 );
 
 CREATE TABLE OrderItems (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    OrderID INT,
-    ProductID INT,
+    OrderID INT,     -- nullable due to ON DELETE SET NULL
+    ProductID INT,   -- nullable due to ON DELETE SET NULL
     FOREIGN KEY (OrderID) REFERENCES Orders(ID) ON DELETE SET NULL,
     FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE SET NULL
 );
